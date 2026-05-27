@@ -1,0 +1,16 @@
+export const colors = {
+  bg:         "#1e1e1c",
+  bgCard:     "#2a2a28",
+  gold:       "#EF9F27",
+  goldLight:  "#FAC775",
+  goldDark:   "#633806",
+  purple:     "#534AB7",
+  purpleLight:"#CECBF6",
+  purpleDark: "#26215C",
+  green:      "#0F6E56",
+  greenLight: "#5DCAA5",
+  greenDark:  "#04342C",
+  textPrimary:"#D3D1C7",
+  textMuted:  "#888780",
+  textFaint:  "#5F5E5A",
+}
