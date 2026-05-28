@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { colors } from "@/src/theme/colors";
 
 export default function TabLayout() {
@@ -9,11 +10,41 @@ export default function TabLayout() {
       tabBarInactiveTintColor: colors.textFaint,
       headerShown: false,
     }}>
-      <Tabs.Screen name="index"    options={{ title: "início" }} />
-      <Tabs.Screen name="album"    options={{ title: "álbum" }} />
-      <Tabs.Screen name="explorar" options={{ title: "explorar" }} />
-      <Tabs.Screen name="ranking"  options={{ title: "ranking" }} />
-      <Tabs.Screen name="perfil"   options={{ title: "perfil" }} />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "início",
+          tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="album"
+        options={{
+          title: "álbum",
+          tabBarIcon: ({ color, size }) => <Ionicons name="book-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="explorar"
+        options={{
+          title: "explorar",
+          tabBarIcon: ({ color, size }) => <Ionicons name="map-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="two"
+        options={{
+          title: "ranking",
+          tabBarIcon: ({ color, size }) => <Ionicons name="bar-chart-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="perfil"
+        options={{
+          title: "perfil",
+          tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
