@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { s } from "../../src/theme/Explorarstyles";
+import { s } from "../../src/theme/explorarStyles";
 import {
   CIDADES,
   PAISES,
