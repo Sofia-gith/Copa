@@ -118,7 +118,7 @@ export const JOGADORES: Figurinha[] = [
   { id: "jor-3", nome: "Ali Olwan", selecao: "Jordânia", posicao: "Ataque", raridade: "Comum", foto: require("../assets/GrupoJ/Jordania/Ali Olwan.png"), tipoCard: "Jogador" },
 
   // --- MASCOTES ---
-  { id: "masc-1", nome: "La'eeb", selecao: "Catar 2022", posicao: "Ataque", raridade: "Lendário", foto: require("../assets/images/icon.png"), tipoCard: "Mascote" },
-  { id: "masc-2", nome: "Fuleco", selecao: "Brasil 2014", posicao: "Meio-campo", raridade: "Raro", foto: require("../assets/images/icon.png"), tipoCard: "Mascote" },
-  { id: "masc-3", nome: "Zabivaka", selecao: "Rússia 2018", posicao: "Ataque", raridade: "Raro", foto: require("../assets/images/icon.png"), tipoCard: "Mascote" },
+  { id: "masc-1", nome: "La'eeb", selecao: "Catar 2022", posicao: "Ataque", raridade: "Lendário", foto: require("../assets/images/La eeb.jpg"), tipoCard: "Mascote" },
+  { id: "masc-2", nome: "Fuleco", selecao: "Brasil 2014", posicao: "Meio-campo", raridade: "Raro", foto: require("../assets/images/Fuleco.png"), tipoCard: "Mascote" },
+  { id: "masc-3", nome: "Zabivaka", selecao: "Rússia 2018", posicao: "Ataque", raridade: "Raro", foto: require("../assets/images/Zabivaka.jpg"), tipoCard: "Mascote" },
 ];

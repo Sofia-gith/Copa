@@ -10,6 +10,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  Pressable,
 } from "react-native";
 
 // ─── Componentes Menores ───────────────────────────────────────────────────────
@@ -63,7 +65,13 @@ function FilterPill({
   );
 }
 
-function CardSticker({ item }: { item: Figurinha }) {
+function CardSticker({
+  item,
+  onPress,
+}: {
+  item: Figurinha;
+  onPress: (item: Figurinha) => void;
+}) {
   const isLendario = item.raridade === "Lendário";
   const isRaro = item.raridade === "Raro";
 
@@ -72,7 +80,11 @@ function CardSticker({ item }: { item: Figurinha }) {
   const badgeText = isLendario ? "#CECBF6" : isRaro ? "#5DCAA5" : "#888780";
 
   return (
-    <View style={[s.card, { backgroundColor: cardBg }]}>
+    <TouchableOpacity
+      style={[s.card, { backgroundColor: cardBg }]}
+      onPress={() => onPress(item)}
+      activeOpacity={0.8}
+    >
       <View style={s.cardImageContainer}>
         {item.bloqueado ? (
           <Ionicons name="lock-closed" size={32} color="#5F5E5A" />
@@ -91,7 +103,79 @@ function CardSticker({ item }: { item: Figurinha }) {
           {item.raridade.toUpperCase()}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
+  );
+}
+
+function StickerModal({
+  item,
+  visible,
+  onClose,
+}: {
+  item: Figurinha | null;
+  visible: boolean;
+  onClose: () => void;
+}) {
+  if (!item) return null;
+
+  const isLendario = item.raridade === "Lendário";
+  const isRaro = item.raridade === "Raro";
+
+  const cardBg = isLendario ? "#26215C" : isRaro ? "#04342C" : "#2A2A28";
+  const badgeBg = isLendario ? "#534AB7" : isRaro ? "#0F6E56" : "#3E3E3C";
+  const badgeText = isLendario ? "#CECBF6" : isRaro ? "#5DCAA5" : "#888780";
+
+  return (
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onClose}
+    >
+      <Pressable style={s.modalOverlay} onPress={onClose}>
+        <Pressable style={[s.modalContent, { backgroundColor: cardBg }]}>
+          <TouchableOpacity style={s.modalClose} onPress={onClose}>
+            <Ionicons name="close" size={20} color="#FFF" />
+          </TouchableOpacity>
+
+          <View style={s.modalImageContainer}>
+            {item.bloqueado ? (
+              <Ionicons name="lock-closed" size={64} color="#5F5E5A" />
+            ) : (
+              <Image
+                source={item.foto}
+                style={s.modalImage}
+                resizeMode="cover"
+              />
+            )}
+          </View>
+
+          <Text style={s.modalName}>{item.bloqueado ? "???" : item.nome}</Text>
+          <Text style={s.modalSelection}>
+            {item.bloqueado ? "Bloqueado" : item.selecao}
+          </Text>
+
+          <View style={s.modalInfoRow}>
+            <View style={s.modalInfoBadge}>
+              <Text style={s.modalInfoLabel}>Posição</Text>
+              <Text style={s.modalInfoValue}>
+                {item.bloqueado ? "???" : item.posicao}
+              </Text>
+            </View>
+            <View style={s.modalInfoBadge}>
+              <Text style={s.modalInfoLabel}>Tipo</Text>
+              <Text style={s.modalInfoValue}>{item.tipoCard}</Text>
+            </View>
+          </View>
+
+          <View style={[s.modalRarityBadge, { backgroundColor: badgeBg }]}>
+            <Text style={[s.modalRarityText, { color: badgeText }]}>
+              {item.raridade.toUpperCase()}
+            </Text>
+          </View>
+        </Pressable>
+      </Pressable>
+    </Modal>
   );
 }
 
@@ -101,6 +185,9 @@ type FiltroPrincipal = "Jogadores" | "Seleções" | "Mascotes";
 
 export default function AlbumScreen() {
   const [filtro, setFiltro] = useState<FiltroPrincipal>("Jogadores");
+  const [selectedSticker, setSelectedSticker] = useState<Figurinha | null>(
+    null,
+  );
 
   const sections = useMemo(() => {
     if (filtro === "Jogadores") {
@@ -194,7 +281,11 @@ export default function AlbumScreen() {
               )}
               <View style={s.grid}>
                 {section.data.map((item) => (
-                  <CardSticker key={item.id} item={item} />
+                  <CardSticker
+                    key={item.id}
+                    item={item}
+                    onPress={setSelectedSticker}
+                  />
                 ))}
               </View>
             </View>
@@ -226,6 +317,12 @@ export default function AlbumScreen() {
           />
         </TouchableOpacity>
       </ScrollView>
+
+      <StickerModal
+        item={selectedSticker}
+        visible={!!selectedSticker}
+        onClose={() => setSelectedSticker(null)}
+      />
     </SafeAreaView>
   );
 }
