@@ -39,12 +39,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="perfil"
+        name="quiz"
         options={{
-          title: "perfil",
-          tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+          title: "desafios",
+          tabBarIcon: ({ color, size }) => <Ionicons name="flash-outline" size={size} color={color} />,
         }}
       />
-    </Tabs>
-  );
-}
+      </Tabs>
+      );
+      }
