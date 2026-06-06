@@ -30,6 +30,8 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="cidade/index" options={{ headerShown: false }} />
         <Stack.Screen name="cidade/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="historico/index" options={{ headerShown: false }} />
+        <Stack.Screen name="historico/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
