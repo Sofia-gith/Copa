@@ -22,7 +22,7 @@ const CATEGORIES = [
     icon: "location-sharp",
     borderColor: "#3a3a38",
     bg: colors.bgCard,
-    route: "/(tabs)/explorar",
+    route: "/cidade",
   },
   {
     id: "paises",
@@ -32,7 +32,7 @@ const CATEGORIES = [
     icon: "earth",
     borderColor: colors.green,
     bg: colors.greenDark,
-    route: "/(tabs)/explorar",
+    route: "/paises",
   },
   {
     id: "estadios",
@@ -40,9 +40,9 @@ const CATEGORIES = [
     subtitle: "Arenas do mundial",
     xp: "+30 XP",
     icon: "football",
-    borderColor: "#5E292E", // Mantendo um tom de vinho mas alinhado
+    borderColor: "#5E292E",
     bg: "#3A191C",
-    route: "/(tabs)/explorar",
+    route: "/estadios",
   },
   {
     id: "mascotes",
@@ -52,7 +52,7 @@ const CATEGORIES = [
     icon: "happy",
     borderColor: colors.purple,
     bg: colors.purpleDark,
-    route: "/(tabs)/explorar",
+    route: "/mascotes",
   },
   {
     id: "historico",
@@ -63,7 +63,7 @@ const CATEGORIES = [
     borderColor: colors.gold,
     bg: colors.goldDark,
     fullWidth: true,
-    route: "/(tabs)/explorar",
+    route: "/historico",
   },
 ];
 
@@ -79,11 +79,7 @@ function CategoryCard({ item }: { item: typeof CATEGORIES[0] }) {
         item.fullWidth && s.categoryCardFull,
       ]}
       activeOpacity={0.8}
-      onPress={() => {
-        if (item.id === "estadios") {
-          router.push("/estadios");
-        }
-      }}
+      onPress={() => router.push(item.route as any)}
     >
       <View style={s.categoryTop}>
         <View style={[s.categoryIconContainer, { backgroundColor: "rgba(255,255,255,0.08)" }]}>

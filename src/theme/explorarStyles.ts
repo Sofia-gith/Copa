@@ -11,6 +11,15 @@ export const s = StyleSheet.create({
   headerTitulo:    { fontSize: 22, fontWeight: "600", color: colors.goldLight },
   avatarGold:      { width: 30, height: 30, borderRadius: 15, backgroundColor: colors.gold, alignItems: "center", justifyContent: "center" },
   avatarGoldTexto: { fontSize: 11, fontWeight: "600", color: colors.bg },
+  backBtn:         { width: 36, height: 36, borderRadius: 18, backgroundColor: "rgba(255,255,255,0.05)", alignItems: "center", justifyContent: "center" },
+
+  // filtros
+  filtrosScroll:   { marginBottom: 14 },
+  filtrosContent:  { paddingHorizontal: 12, gap: 8 },
+  filtroPill:      { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 18, backgroundColor: colors.bgCard, borderWidth: 0.5, borderColor: "#3a3a38" },
+  filtroPillAtivo: { backgroundColor: colors.gold, borderColor: colors.gold },
+  filtroTexto:     { fontSize: 12, color: colors.textMuted, fontWeight: "600" },
+  filtroTextoAtivo:{ color: colors.bg, fontWeight: "700" },
 
   // Categorias Grid
   section:      { paddingHorizontal: 12, marginBottom: 12 },
@@ -121,6 +130,10 @@ export const s = StyleSheet.create({
   destinoRatingTexto:{ fontSize: 10, color: colors.gold },
   destinoXpBadge:    { borderRadius: 4, paddingHorizontal: 6, paddingVertical: 2 },
   destinoXpTexto:    { fontSize: 9, fontWeight: "600" },
+
+  destinosSectionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8 },
+  destinosSectionTitle:  { fontSize: 11, color: colors.textPrimary, fontWeight: "600" },
+  destinosSectionAction: { fontSize: 11, color: colors.gold, fontWeight: "600" },
 
   // roteiro
   roteiro:        { backgroundColor: "#1a1927", borderRadius: 10, padding: 12, borderWidth: 0.5, borderColor: "#2e2b52" },

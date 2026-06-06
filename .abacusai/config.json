@@ -1,0 +1,12 @@
+{
+  "additionalDirectories": [
+    "C:\\Users\\brother\\.abacusai\\screenshots"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npx expo export *)",
+      "Bash(git *)"
+    ]
+  }
+}
