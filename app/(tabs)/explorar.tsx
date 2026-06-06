@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   View,
   Text,
@@ -9,100 +8,111 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { s } from "../../src/theme/explorarStyles";
-import {
-  CIDADES,
-  PAISES,
-  BANDEIRAS,
-  NOMES_PAISES,
-  type Pais,
-} from "@/src/data/destinos";
+
+import { colors } from "../../src/theme/colors";
 
 // ─── componentes ──────────────────────────────────────────────────────────────
 
-function Filtros({ ativo, onSelect }: { ativo: Pais; onSelect: (f: Pais) => void }) {
-  return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      style={s.filtrosScroll}
-      contentContainerStyle={s.filtrosContent}
-    >
-      {PAISES.map((f) => (
-        <TouchableOpacity
-          key={f}
-          style={[s.filtroPill, ativo === f && s.filtroPillAtivo]}
-          onPress={() => onSelect(f)}
-          activeOpacity={0.8}
-        >
-          <Text style={[s.filtroTexto, ativo === f && s.filtroTextoAtivo]}>
-            {f === "Todos" ? "Todos" : `${BANDEIRAS[f]} ${NOMES_PAISES[f]}`}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
-  );
-}
+const CATEGORIES = [
+  {
+    id: "destinos",
+    title: "Destinos",
+    subtitle: "Cidades sede da Copa",
+    xp: "+30 XP",
+    icon: "location-sharp",
+    borderColor: "#3a3a38",
+    bg: colors.bgCard,
+    route: "/(tabs)/explorar",
+  },
+  {
+    id: "paises",
+    title: "Países",
+    subtitle: "Seleções participantes",
+    xp: "+25 XP",
+    icon: "earth",
+    borderColor: colors.green,
+    bg: colors.greenDark,
+    route: "/(tabs)/explorar",
+  },
+  {
+    id: "estadios",
+    title: "Estádios",
+    subtitle: "Arenas do mundial",
+    xp: "+30 XP",
+    icon: "football",
+    borderColor: "#5E292E", // Mantendo um tom de vinho mas alinhado
+    bg: "#3A191C",
+    route: "/(tabs)/explorar",
+  },
+  {
+    id: "mascotes",
+    title: "Mascotes",
+    subtitle: "Mascotes anteriores",
+    xp: "+20 XP",
+    icon: "happy",
+    borderColor: colors.purple,
+    bg: colors.purpleDark,
+    route: "/(tabs)/explorar",
+  },
+  {
+    id: "historico",
+    title: "Copas Anteriores",
+    subtitle: "Histórico completo do mundial",
+    xp: "+40 XP",
+    icon: "trophy",
+    borderColor: colors.gold,
+    bg: colors.goldDark,
+    fullWidth: true,
+    route: "/(tabs)/explorar",
+  },
+];
 
-function CardCidade({ cidade }: { cidade: typeof CIDADES[0] }) {
+function CategoryCard({ item }: { item: typeof CATEGORIES[0] }) {
   const router = useRouter();
+  const iconColor = item.id === "historico" ? colors.goldLight : item.id === "destinos" ? colors.gold : "#fff";
+  
   return (
     <TouchableOpacity
-      style={s.cidadeCard}
+      style={[
+        s.categoryCard,
+        { backgroundColor: item.bg, borderColor: item.borderColor },
+        item.fullWidth && s.categoryCardFull,
+      ]}
       activeOpacity={0.8}
-      onPress={() => router.push(`/cidade/${cidade.id}` as any)}
+      onPress={() => {
+        // Implementar navegação futura
+      }}
     >
-      <View style={[s.cidadeIcone, { backgroundColor: cidade.destaque.iconeBg }]}>
-        <Ionicons name={cidade.destaque.icone as any} size={18} color={cidade.destaque.iconeColor} />
-      </View>
-
-      <View style={s.cidadeTextos}>
-        <Text style={s.cidadeNome}>{cidade.nome}</Text>
-        <Text style={s.cidadePontos}>
-          {cidade.pontos.length + 1} pontos turísticos
-        </Text>
-      </View>
-
-      <View style={s.cidadeSetaCol}>
-        <View style={s.cidadeXpBadge}>
-          <Text style={s.cidadeXpTexto}>+{cidade.destaque.xp} XP</Text>
+      <View style={s.categoryTop}>
+        <View style={[s.categoryIconContainer, { backgroundColor: "rgba(255,255,255,0.08)" }]}>
+          <Ionicons 
+            name={item.icon as any} 
+            size={22} 
+            color={iconColor} 
+          />
         </View>
-        <Ionicons name="arrow-forward" size={14} color="#5F5E5A" />
+        <View style={s.categoryXpBadge}>
+          <Text style={s.categoryXpText}>{item.xp}</Text>
+        </View>
+      </View>
+
+      <View style={s.categoryBottom}>
+        <View style={{ flex: 1 }}>
+          <Text style={s.categoryTitle}>{item.title}</Text>
+          <Text style={s.categorySubtitle}>{item.subtitle}</Text>
+        </View>
+        <Ionicons name="arrow-forward" size={14} color={colors.textFaint} style={s.categoryArrow} />
       </View>
     </TouchableOpacity>
-  );
-}
-
-function GrupoPais({ pais, cidades }: { pais: string; cidades: typeof CIDADES }) {
-  return (
-    <View>
-      <View style={s.paisHeader}>
-        <Text style={s.paisBandeira}>{BANDEIRAS[pais]}</Text>
-        <Text style={s.paisNome}>{NOMES_PAISES[pais]}</Text>
-      </View>
-      <View style={s.cidadesLista}>
-        {cidades.map((c) => <CardCidade key={c.id} cidade={c} />)}
-      </View>
-    </View>
   );
 }
 
 // ─── tela principal ────────────────────────────────────────────────────────────
 
 export default function ExplorarScreen() {
-  const [filtro, setFiltro] = useState<Pais>("Todos");
-
-  const cidadesFiltradas = filtro === "Todos"
-    ? CIDADES
-    : CIDADES.filter((c) => c.pais === filtro);
-
-  const paisesFiltrados = filtro === "Todos"
-    ? (["Canada", "Mexico", "EUA"] as const)
-    : [filtro];
-
   return (
     <SafeAreaView style={s.safe}>
       <ScrollView style={s.scroll} showsVerticalScrollIndicator={false}>
-
         {/* header */}
         <View style={s.header}>
           <View>
@@ -114,18 +124,15 @@ export default function ExplorarScreen() {
           </View>
         </View>
 
-        {/* filtros */}
-        <Filtros ativo={filtro} onSelect={setFiltro} />
-
-        {/* lista agrupada por país */}
         <View style={s.section}>
-          {paisesFiltrados.map((pais) => {
-            const cidades = cidadesFiltradas.filter((c) => c.pais === pais);
-            if (cidades.length === 0) return null;
-            return <GrupoPais key={pais} pais={pais} cidades={cidades} />;
-          })}
+          <Text style={s.sectionTitle}>CATEGORIAS</Text>
+          
+          <View style={s.categoriesGrid}>
+            {CATEGORIES.map((cat) => (
+              <CategoryCard key={cat.id} item={cat} />
+            ))}
+          </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
