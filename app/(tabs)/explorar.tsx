@@ -80,7 +80,9 @@ function CategoryCard({ item }: { item: typeof CATEGORIES[0] }) {
       ]}
       activeOpacity={0.8}
       onPress={() => {
-        // Implementar navegação futura
+        if (item.id === "estadios") {
+          router.push("/estadios");
+        }
       }}
     >
       <View style={s.categoryTop}>
