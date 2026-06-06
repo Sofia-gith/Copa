@@ -6,24 +6,78 @@ export const s = StyleSheet.create({
   scroll: { flex: 1 },
 
   // header
-  header:          { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 16, paddingTop: 12, paddingBottom: 8 },
+  header:          { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16 },
   headerSub:       { fontSize: 10, color: colors.textFaint, letterSpacing: 1.5 },
   headerTitulo:    { fontSize: 22, fontWeight: "600", color: colors.goldLight },
-  avatarGold:      { width: 34, height: 34, borderRadius: 17, backgroundColor: colors.gold, alignItems: "center", justifyContent: "center" },
-  avatarGoldTexto: { fontSize: 11, fontWeight: "700", color: colors.bg },
+  avatarGold:      { width: 30, height: 30, borderRadius: 15, backgroundColor: colors.gold, alignItems: "center", justifyContent: "center" },
+  avatarGoldTexto: { fontSize: 11, fontWeight: "600", color: colors.bg },
 
-  // filtros
-  filtrosScroll:    { marginBottom: 10 },
-  filtrosContent:   { paddingHorizontal: 12, gap: 6, flexDirection: "row" },
-  filtroPill:       { backgroundColor: colors.bgCard, borderRadius: 20, paddingHorizontal: 14, paddingVertical: 5, borderWidth: 0.5, borderColor: "#3a3a38" },
-  filtroPillAtivo:  { backgroundColor: colors.gold, borderColor: colors.gold },
-  filtroTexto:      { fontSize: 10, color: colors.textMuted },
-  filtroTextoAtivo: { color: colors.bg, fontWeight: "600" },
-
+  // Categorias Grid
   section:      { paddingHorizontal: 12, marginBottom: 12 },
-  rowBetween:   { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8 },
-  sectionTitle: { fontSize: 11, color: colors.textMuted, fontWeight: "600" },
-  link:         { fontSize: 10, color: colors.gold },
+  sectionTitle: { fontSize: 11, color: colors.textMuted, fontWeight: "600", letterSpacing: 1, marginBottom: 12, textTransform: "uppercase" },
+  
+  categoriesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 10,
+  },
+  categoryCard: {
+    width: "48.5%",
+    borderRadius: 16,
+    padding: 16,
+    height: 150,
+    justifyContent: "space-between",
+    borderWidth: 0.5,
+  },
+  categoryCardFull: {
+    width: "100%",
+    height: 110,
+  },
+  categoryTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  categoryIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  categoryXpBadge: {
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+  },
+  categoryXpText: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: colors.goldLight,
+  },
+  categoryBottom: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  },
+  categoryTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: colors.textPrimary,
+    marginBottom: 2,
+  },
+  categorySubtitle: {
+    fontSize: 10,
+    color: colors.textMuted,
+    fontWeight: "500",
+  },
+  categoryArrow: {
+    opacity: 0.5,
+  },
 
   // países / agrupamento
   paisHeader:       { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8, marginTop: 4 },
